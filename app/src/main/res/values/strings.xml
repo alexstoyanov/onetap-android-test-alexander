@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">OneTap</string>
+    <string name="not_granted">not granted.</string>
+    <string name="pressure_value"><![CDATA[Pressure: <font color=#F51B88>%1$s</font>]]></string>
+    <string name="no_location">There is no location.</string>
+    <string name="no_forecast_for_location">There is no forecast for your location.</string>
+    <string name="location_premision_not_granted">Location permission not granted</string>
+    <string name="started_location_tracking">Started tracking location for accurate forecast predictions.</string>
+    <string name="forecast">Forecast</string>
+    <string name="cats">Cats</string>
+    <string-array name="cat_names">
+        <item>Abby</item>
+        <item>Angel</item>
+        <item>Annie</item>
+        <item>Baby</item>
+        <item>Bailey</item>
+        <item>Bandit</item>
+        <item>Bear</item>
+        <item>Bella</item>
+        <item>Bob</item>
+        <item>Boo</item>
+        <item>Boots</item>
+        <item>Bubba</item>
+        <item>Buddy</item>
+        <item>Buster</item>
+        <item>Cali</item>
+        <item>Callie</item>
+        <item>Casper</item>
+        <item>Charlie</item>
+        <item>Chester</item>
+        <item>Coco</item>
+        <item>Chloe</item>
+        <item>Cleo</item>
+        <item>Cookie</item>
+        <item>Cuddles</item>
+        <item>Daisy</item>
+        <item>Dusty</item>
+        <item>Felix</item>
+        <item>Fluffy</item>
+        <item>Garfield</item>
+        <item>George</item>
+        <item>Ginger</item>
+        <item>Gizmo</item>
+        <item>Gracie</item>
+        <item>Harley</item>
+        <item>Jack</item>
+        <item>Jasmine</item>
+        <item>Jasper</item>
+        <item>Kiki</item>
+        <item>Kitty</item>
+        <item>Leo</item>
+        <item>Lilly</item>
+        <item>Loki</item>
+        <item>Lucky</item>
+        <item>Max</item>
+        <item>Milo</item>
+        <item>Missy</item>
+        <item>Misty</item>
+        <item>Miss kitty</item>
+    </string-array>
+</resources>
