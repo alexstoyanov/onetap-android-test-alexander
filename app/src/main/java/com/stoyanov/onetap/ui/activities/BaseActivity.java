@@ -25,10 +25,8 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
-import com.google.android.gms.location.LocationSettingsStates;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.stoyanov.onetap.R;
-import com.stoyanov.onetap.networking.events.OnForecastLoadedEvent;
 import com.stoyanov.onetap.networking.events.OnLocationChangedEvent;
 import com.stoyanov.onetap.utils.BusProvider;
 import com.stoyanov.onetap.utils.Constants;
@@ -235,7 +233,7 @@ public abstract class BaseActivity extends AppCompatActivity
             case PERMISSION_USE_LOCATION: {
                 if (!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     Toast.makeText(this,
-                            R.string.location_premision_not_granted, Toast.LENGTH_SHORT).show();
+                            R.string.location_permission_not_granted, Toast.LENGTH_SHORT).show();
                 }
                 return;
             }
