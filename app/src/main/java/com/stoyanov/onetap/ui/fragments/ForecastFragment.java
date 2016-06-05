@@ -6,6 +6,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +17,7 @@ import com.stoyanov.onetap.adapters.ForecastListAdapter;
 import com.stoyanov.onetap.adapters.listeners.OnForecastRowClickListener;
 import com.stoyanov.onetap.networking.OneTabDataProvider;
 import com.stoyanov.onetap.networking.events.OnForecastLoadedEvent;
+import com.stoyanov.onetap.networking.events.OnLocationChangedEvent;
 import com.stoyanov.onetap.utils.Constants;
 import com.stoyanov.onetap.utils.SharedPrefsHelper;
 
@@ -26,9 +29,13 @@ import butterknife.BindView;
 public class ForecastFragment extends BaseFragment implements OnForecastRowClickListener {
     private static final String TAG = ForecastFragment.class.getSimpleName();
     private static final String DAYS_COUNT = "DaysCount";
-    
+
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
     @BindView(R.id.rv_forecast)
     RecyclerView rvForecast;
+    @BindView(R.id.txt_no_location)
+    TextView txtNoLocation;
 
     public ForecastFragment() {
     }
@@ -64,20 +71,22 @@ public class ForecastFragment extends BaseFragment implements OnForecastRowClick
         Double latitude = Double.longBitsToDouble(prefs.getLong(Constants.LATITUDE, -1));
         if (!longitude.isNaN() && !latitude.isNaN()
                 && longitude != -1 && latitude != -1) {
+            txtNoLocation.setVisibility(View.GONE);
+            toggleProgressBar(true, progressBar, rvForecast);
             OneTabDataProvider.getInstance(getContext()).
                     getForecast(longitude, latitude, daysCount, Constants.APP_ID);
-        } else {
-            Toast.makeText(getContext(), R.string.no_location, Toast.LENGTH_SHORT).show();
+        }else{
+            txtNoLocation.setVisibility(View.VISIBLE);
         }
-
     }
 
     @Subscribe
-    public void onForecastLoaded(OnForecastLoadedEvent e) {
-        if (e != null && e.getDailyForecastList() != null) {
-            if (getArguments().getInt(DAYS_COUNT) == e.getDaysCount()) {
+    public void onForecastLoaded(OnForecastLoadedEvent event) {
+        toggleProgressBar(false, progressBar, rvForecast);
+        if (event != null && event.getDailyForecastList() != null) {
+            if (getArguments().getInt(DAYS_COUNT) == event.getDaysCount()) {
                 ForecastListAdapter adapter =
-                        new ForecastListAdapter(ForecastFragment.this, e.getDailyForecastList());
+                        new ForecastListAdapter(ForecastFragment.this, event.getDailyForecastList());
                 rvForecast.setAdapter(adapter);
             }
         } else {
@@ -88,6 +97,11 @@ public class ForecastFragment extends BaseFragment implements OnForecastRowClick
     @Override
     public void onForecastRowClicked(double pressure) {
         showCustomSnackBar(pressure);
+    }
+
+    @Subscribe
+    public void onLocationChanged(OnLocationChangedEvent event){
+        requestForecast();
     }
 
     private void showCustomSnackBar(double pressure) {

@@ -18,6 +18,8 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.stoyanov.onetap.R;
+import com.stoyanov.onetap.networking.events.OnForecastLoadedEvent;
+import com.stoyanov.onetap.networking.events.OnLocationChangedEvent;
 import com.stoyanov.onetap.utils.BusProvider;
 import com.stoyanov.onetap.utils.Constants;
 import com.stoyanov.onetap.utils.PermissionManager;
@@ -134,6 +136,7 @@ public abstract class BaseActivity extends AppCompatActivity
         SharedPrefsHelper prefs = SharedPrefsHelper.getInstance(this);
         prefs.putLong(Constants.LATITUDE, Double.doubleToLongBits(location.getLatitude()));
         prefs.putLong(Constants.LONGITUDE, Double.doubleToLongBits(location.getLongitude()));
+        BusProvider.getInstance().post(new OnLocationChangedEvent());
     }
 
     @Override

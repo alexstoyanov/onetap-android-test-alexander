@@ -2,7 +2,6 @@
     <string name="app_name">OneTap</string>
     <string name="not_granted">not granted.</string>
     <string name="pressure_value"><![CDATA[Pressure: <font color=#F51B88>%1$s</font>]]></string>
-    <string name="no_location">There is no location.</string>
     <string name="no_forecast_for_location">There is no forecast for your location.</string>
     <string name="location_premision_not_granted">Location permission not granted</string>
     <string name="started_location_tracking">Started tracking location for accurate forecast predictions.</string>
@@ -10,6 +9,9 @@
     <string name="cats">Cats</string>
     <string name="five_days">5 Days</string>
     <string name="sixteen_days">16 Days</string>
+    <string name="please_enable_your_location_provider">Please enable your location provider.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string-array name="cat_names">
         <item>Abby</item>
         <item>Angel</item>
