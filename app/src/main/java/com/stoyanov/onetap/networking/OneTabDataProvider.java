@@ -38,12 +38,12 @@ public class OneTabDataProvider {
                     @Override
                     public void success(ForecastResponse forecastResponse, Response response) {
                         BusProvider.getInstance().post(
-                                new OnForecastLoadedEvent(forecastResponse.getDailyForecastList()));
+                                new OnForecastLoadedEvent(forecastResponse.getDailyForecastList(), forecastResponse.getDaysCount()));
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
-                        BusProvider.getInstance().post(new OnForecastLoadedEvent(null));
+                        BusProvider.getInstance().post(new OnForecastLoadedEvent(null, 0));
                     }
                 });
     }

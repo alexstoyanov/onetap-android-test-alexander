@@ -2,23 +2,20 @@ package com.stoyanov.onetap.ui.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.stoyanov.onetap.R;
 import com.stoyanov.onetap.adapters.TabsPagerAdapter;
 import com.stoyanov.onetap.adapters.ViewPagerAdapter;
-import com.stoyanov.onetap.ui.fragments.CatNamesFragment;
+import com.stoyanov.onetap.ui.fragments.ForecastFragment;
 import com.stoyanov.onetap.ui.views.IndicatorViewPager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 
 public class CatsActivity extends BaseActivity {
+    private static final int FIVE = 5;
+    private static final int SIXTEEN = 16;
+
     @BindView(R.id.pager_header)
     ViewPager pagerHeader;
     @BindView(R.id.grp_pager_indicator)
@@ -65,9 +62,8 @@ public class CatsActivity extends BaseActivity {
 
     private void setupTabPager(ViewPager viewPager) {
         TabsPagerAdapter TabPagerAdapter = new TabsPagerAdapter(getSupportFragmentManager());
-        TabPagerAdapter.addFragment(new CatNamesFragment(), "tab 1");
-        TabPagerAdapter.addFragment(new CatNamesFragment(), "tab 2");
-        TabPagerAdapter.addFragment(new CatNamesFragment(), "tab 3");
+        TabPagerAdapter.addFragment(ForecastFragment.newInstance(FIVE), getString(R.string.five_days));
+        TabPagerAdapter.addFragment(ForecastFragment.newInstance(SIXTEEN), getString(R.string.sixteen_days));
         viewPager.setAdapter(TabPagerAdapter);
     }
 }

@@ -41,7 +41,6 @@ public abstract class BaseActivity extends AppCompatActivity
     private boolean isRequestingLocationUpdates;
     private LocationRequest locationRequest;
     private Location currentLocation;
-    protected SharedPrefsHelper prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +65,6 @@ public abstract class BaseActivity extends AppCompatActivity
     }
 
     private void initFields() {
-        prefs = SharedPrefsHelper.getInstance(this);
         locationRequest = new LocationRequest();
         isRequestingLocationUpdates = false;
         googleApiClient = new GoogleApiClient.Builder(this).
@@ -133,6 +131,7 @@ public abstract class BaseActivity extends AppCompatActivity
     @Override
     public void onLocationChanged(Location location) {
         currentLocation = location;
+        SharedPrefsHelper prefs = SharedPrefsHelper.getInstance(this);
         prefs.putLong(Constants.LATITUDE, Double.doubleToLongBits(location.getLatitude()));
         prefs.putLong(Constants.LONGITUDE, Double.doubleToLongBits(location.getLongitude()));
     }
@@ -198,8 +197,7 @@ public abstract class BaseActivity extends AppCompatActivity
         switch (requestCode) {
             case PERMISSION_USE_LOCATION: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this,
-                            R.string.started_location_tracking, Toast.LENGTH_SHORT).show();
+                    startLocationUpdates();
                 } else {
                     Toast.makeText(this,
                             R.string.location_premision_not_granted, Toast.LENGTH_SHORT).show();

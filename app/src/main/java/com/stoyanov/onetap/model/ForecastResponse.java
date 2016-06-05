@@ -10,6 +10,8 @@ import java.util.List;
 public class ForecastResponse {
     @SerializedName("list")
     private List<DailyForecast> dailyForecastList;
+    @SerializedName("cnt")
+    private int daysCount;
 
     public List<DailyForecast> getDailyForecastList() {
         return dailyForecastList;
@@ -17,5 +19,13 @@ public class ForecastResponse {
 
     public void setDailyForecastList(List<DailyForecast> dailyForecastList) {
         this.dailyForecastList = dailyForecastList;
+    }
+
+    public int getDaysCount() {
+        return daysCount;
+    }
+
+    public void setDaysCount(int daysCount) {
+        this.daysCount = daysCount;
     }
 }

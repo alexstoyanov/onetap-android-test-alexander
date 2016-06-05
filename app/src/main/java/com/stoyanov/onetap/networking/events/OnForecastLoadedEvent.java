@@ -9,9 +9,11 @@ import java.util.List;
  */
 public class OnForecastLoadedEvent {
     private List<DailyForecast> dailyForecastList;
+    private int daysCount;
 
-    public OnForecastLoadedEvent(List<DailyForecast> dailyForecastList) {
+    public OnForecastLoadedEvent(List<DailyForecast> dailyForecastList, int daysCount) {
         this.dailyForecastList = dailyForecastList;
+        this.daysCount = daysCount;
     }
 
     public List<DailyForecast> getDailyForecastList() {
@@ -20,5 +22,13 @@ public class OnForecastLoadedEvent {
 
     public void setDailyForecastList(List<DailyForecast> dailyForecastList) {
         this.dailyForecastList = dailyForecastList;
+    }
+
+    public int getDaysCount() {
+        return daysCount;
+    }
+
+    public void setDaysCount(int daysCount) {
+        this.daysCount = daysCount;
     }
 }
