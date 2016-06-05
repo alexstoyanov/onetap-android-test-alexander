@@ -25,7 +25,7 @@ public class CatsActivity extends BaseActivity {
     @BindView(R.id.tabs)
     TabLayout tabLayout;
 
-    private int[] mImageResources = {
+    private int[] imageResources = {
             R.drawable.cat0,
             R.drawable.cat1,
             R.drawable.cat2,
@@ -40,7 +40,7 @@ public class CatsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ViewPagerAdapter headerImagesAdapter = new ViewPagerAdapter(CatsActivity.this, mImageResources);
+        ViewPagerAdapter headerImagesAdapter = new ViewPagerAdapter(CatsActivity.this, imageResources);
         pagerIndicator.setDotsCount(headerImagesAdapter.getCount());
         pagerHeader.setAdapter(headerImagesAdapter);
         pagerHeader.setCurrentItem(0);
