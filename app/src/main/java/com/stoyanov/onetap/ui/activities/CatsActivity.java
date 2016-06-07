@@ -1,8 +1,17 @@
 package com.stoyanov.onetap.ui.activities;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
+import android.view.Display;
+import android.view.View;
+import android.view.Window;
 
 import com.stoyanov.onetap.R;
 import com.stoyanov.onetap.adapters.TabsPagerAdapter;
@@ -24,6 +33,8 @@ public class CatsActivity extends BaseActivity {
     ViewPager pagerTabs;
     @BindView(R.id.tabs)
     TabLayout tabLayout;
+    @BindView(R.id.bottom_sheet)
+    NestedScrollView bottomSheet;
 
     private int[] imageResources = {
             R.drawable.cat0,
@@ -53,6 +64,21 @@ public class CatsActivity extends BaseActivity {
         if (tabLayout != null) {
             tabLayout.setupWithViewPager(pagerTabs);
         }
+        bottomSheet.setFillViewport(true);
+        final BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+        behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        behavior.setPeekHeight(getPeekHeight());
+        bottomSheet.setNestedScrollingEnabled(true);
+        behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(View bottomSheet, int newState) {
+            }
+
+            @Override
+            public void onSlide(View bottomSheet, float slideOffset) {
+            }
+        });
+
     }
 
     @Override
@@ -65,5 +91,23 @@ public class CatsActivity extends BaseActivity {
         TabPagerAdapter.addFragment(ForecastFragment.newInstance(FIVE), getString(R.string.five_days));
         TabPagerAdapter.addFragment(ForecastFragment.newInstance(SIXTEEN), getString(R.string.sixteen_days));
         viewPager.setAdapter(TabPagerAdapter);
+    }
+
+    public int getPeekHeight() {
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int statusBarHeight = getStatusBarHeight(this);
+        int height = (int) (size.y - getResources().getDimension(R.dimen.expanded_header_height) - statusBarHeight);
+        return height;
+    }
+
+    public static int getStatusBarHeight(Context context) {
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            return resources.getDimensionPixelSize(resourceId);
+        }
+        return 0;
     }
 }
